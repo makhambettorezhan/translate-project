@@ -1,0 +1,1 @@
+Uses Google Translate API to translate argv values into language you want and stores them in single file
