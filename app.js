@@ -1,22 +1,20 @@
 const express = require('express');
 const hbs = require('hbs');
-const api = 'AIzaSyCzVZpl_emFH8aVlp6-yS7ozkHlVRd0vbM';
-const googleTranslate = require('google-translate')(api);
 const bodyParser = require('body-parser');
 
+const api = 'AIzaSyCzVZpl_emFH8aVlp6-yS7ozkHlVRd0vbM';
+const googleTranslate = require('google-translate')(api);
+
 var app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'hbs');
+
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
     res.render('home.hbs', {
         pageTitle: 'Home Section'
-    });
-});
-
-app.get('/help', (req, res) => {
-    res.render('help.hbs', {
-        pageTitle: 'Help Section'
     });
 });
 
@@ -31,8 +29,9 @@ app.post('/submit', (req, res) => {
     let text = req.body.word;
     googleTranslate.translate(text, language, (err, translation) => {
         if(err) throw err;
-            console.log(`${language}:> ${translation.translatedText}`);
+
         res.render('submit.hbs', {
+            pageTitle: 'Submit Section',
             language, 
             text,
             translation: translation.translatedText
