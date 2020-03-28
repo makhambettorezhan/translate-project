@@ -6,13 +6,13 @@ const api = 'AIzaSyCzVZpl_emFH8aVlp6-yS7ozkHlVRd0vbM';
 const argv = yargs
     .options({
         language: {
-            demand: true,
+            demand: false,
             alias: 'l',
             describe: 'Language you want to translate',
             string: true
         },
         text: {
-            demand: true,
+            demand: false,
             alias: 't',
             describe: 'Text you want to translate',
             string: true
@@ -35,6 +35,7 @@ try {
 }
 
 console.log(`en:> ${text}`);
+
 googleTranslate.translate(text, language, (err, translation) => {
     console.log(`${language}:> ${translation.translatedText}`);
     list.push({ text: text , translation: translation.translatedText });
