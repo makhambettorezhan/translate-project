@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const api = 'AIzaSyCzVZpl_emFH8aVlp6-yS7ozkHlVRd0vbM';
 const googleTranslate = require('google-translate')(api);
 
+let port = process.env.PORT || 3000;
+
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,6 +42,6 @@ app.post('/submit', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log('Server is up for port 3000');
+app.listen(port, () => {
+    console.log('Server is up for port ' + port);
 });
